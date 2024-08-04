@@ -7,8 +7,28 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Item {
+model Destino {
   id          Int      @id @default(autoincrement())
   name        String
-  description String
+  description String?
+  localizacao String?
+  imagem String?
+  imagem2 String?
+  imagem3 String?
+  imagem4 String?
+  atrativos Atrativo[]
+
 }
+
+model Atrativo {
+  id          Int      @id @default(autoincrement())
+  name        String
+  tipo        String
+  description String?
+  dicas String?
+
+  destino_id Int
+  destinos Destino @relation(fields: [destino_id], references: [id])
+
+}
+

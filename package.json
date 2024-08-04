@@ -14,7 +14,9 @@
   "dependencies": {
     "@prisma/client": "^5.17.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -24,5 +26,6 @@
     "prisma": "^5.17.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
-  }
+  },
+  "type": "module"
 }
