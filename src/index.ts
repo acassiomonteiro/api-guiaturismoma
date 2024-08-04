@@ -1,36 +1,17 @@
-import express from 'express';
-import { PrismaClient } from '@prisma/client';
+import express from "express";
+import cors from "cors";
+import itemRouter from "./routes/itemRouter";
+
+const PORT = process.env.PORT || 4000;
+const HOSTNAME = process.env.HOSTNAME || "http://localhost";
 
 const app = express();
-const prisma = new PrismaClient();
 
+app.use(cors());
 app.use(express.json());
 
-app.get('/users', async (req, res) => {
-  try {
-    const users = await prisma.user.findMany();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
-  }
-});
+app.use("/api", itemRouter);
 
-app.post('/users', async (req, res) => {
-  const { name, email } = req.body;
-  try {
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-      },
-    });
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar usuário' });
-  }
-});
-
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`);
 });
